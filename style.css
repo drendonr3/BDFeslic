@@ -1,0 +1,28 @@
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.principal{
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid #ccc;
+    border-radius: 30px;
+     color: #515151;
+    padding: 20px 30px;
+    width: 430px;
+    justify-content: space-around;
+}
+
+.submit{
+    width:max-content;
+    margin: 5px;
+}
+
+.col-md-4{
+    width: auto;
+}
