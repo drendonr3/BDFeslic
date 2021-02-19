@@ -1,13 +1,12 @@
 from flask import Flask, render_template, request,flash,redirect,session,url_for,make_response
 import os
 import functools
-#from flask_mysqldb import MySQL
+
 #from werkzeug.security import generate_password_hash, check_password_hash
 #from werkzeug.utils import secure_filename
 #from datetime import datetime
 
 import pymysql
-
 conf = {
     "host": "database-1.cwmlgrgmf18v.us-east-2.rds.amazonaws.com",
     "port": 3306,
@@ -18,12 +17,10 @@ conf = {
     "database": "feslic"
 }
 conn = pymysql.connect(**conf)
-
 app= Flask(__name__)
 app.secret_key='5fffa2e766c5f3d1a85ad8979864459a4d12b25e727ae7a78d1d8f958952a828L'
 
-if __name__ == '__name__':
-    app.run(debug=True, host='0.0.0.0', port =80)
+
 
 '''def login_admin_required(view):
     @functools.wraps(view)
@@ -38,8 +35,7 @@ if __name__ == '__name__':
 @app.route('/')
 def index():    
     return render_template('index.html')
-
-
+    
 @app.route('/guardar',methods=['POST'])
 def guardar():
     if request.method == 'POST':
@@ -65,6 +61,8 @@ def consultar():
         print(reg)
         return render_template('lista.html',listas=reg)
 
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0', port =80)
 '''
 @app.route('/cerrarSesion')
 def cerrarSesion():
