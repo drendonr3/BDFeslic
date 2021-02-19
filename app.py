@@ -1,19 +1,27 @@
 from flask import Flask, render_template, request,flash,redirect,session,url_for,make_response
 import os
 import functools
-from flask_mysqldb import MySQL
+#from flask_mysqldb import MySQL
 #from werkzeug.security import generate_password_hash, check_password_hash
 #from werkzeug.utils import secure_filename
 #from datetime import datetime
 
+import pymysql
+
+conf = {
+    "host": "database-1.cwmlgrgmf18v.us-east-2.rds.amazonaws.com",
+    "port": 3306,
+    "user": "admin",
+    "passwd": "00000000",
+    "charset": "utf8mb4",
+    "cursorclass": pymysql.cursors.DictCursor,
+    "database": "feslic"
+}
+conn = pymysql.connect(**conf)
+
 app= Flask(__name__)
 app.secret_key='5fffa2e766c5f3d1a85ad8979864459a4d12b25e727ae7a78d1d8f958952a828L'
-app = Flask(__name__)
-app.config['MYSQL_HOST'] = 'database-2.cfk3hpc50gdi.us-east-1.rds.amazonaws.com'
-app.config['MYSQL_USER'] = 'admin'
-app.config['MYSQL_PASSWORD'] = '00000000'
-app.config['MYSQL_DB'] = 'trial'
-mysql = MySQL(app)
+
 if __name__ == '__name__':
     app.run(debug=True, host='0.0.0.0', port =80)
 
@@ -31,13 +39,31 @@ if __name__ == '__name__':
 def index():    
     return render_template('index.html')
 
-@app.route('/consultar')
-def consultar():
 
-    cur = mysql.connection.cursor()
-    cur.execute("SELECT * FROM personas")
-    reg=cur.fetchone()
-    return reg[1]
+@app.route('/guardar',methods=['POST'])
+def guardar():
+    if request.method == 'POST':
+        primerNombre=request.form['primerNombre']
+        segundoNombre=request.form['segundoNombre']
+        primerApellido=request.form['primerApellido']
+        segundoApellido=request.form['segundoApellido']
+        documento=request.form['documento']
+        correoElectronico=request.form['correoElectronico']
+        cur = conn.cursor()
+        query=primerNombre + segundoNombre + primerApellido + segundoApellido+str(documento) + correoElectronico
+        cur.execute('INSERT INTO personas (primerNombre,segundoNombre,primerApellido,segundoApellido,documento,correoElectronico) VALUES (%s,%s,%s,%s,%s,%s)',(primerNombre,segundoNombre,primerApellido,segundoApellido,documento,correoElectronico))
+        cur.connection.commit()
+        return redirect('/')
+
+@app.route('/consultar',methods=['POST'])
+def consultar():
+    if request.method == 'POST':
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM personas")
+        reg=cur.fetchall()
+        print(1)
+        print(reg)
+        return render_template('lista.html',listas=reg)
 
 '''
 @app.route('/cerrarSesion')

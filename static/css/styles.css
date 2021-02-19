@@ -26,3 +26,15 @@ body{
 .col-md-4{
     width: auto;
 }
+
+.title-list{
+    font-weight: bold;
+}
+
+.nombre{
+    width: 120px;
+}
+
+.correo{
+    width: 200px;
+}

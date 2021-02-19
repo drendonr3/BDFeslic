@@ -10,38 +10,38 @@
     <link rel='stylesheet' type='text/css' href="{{ url_for('static',filename='css/styles.css') }}">
 </head>
 <body>
-    <form class="principal" action='/consultar'>
+    <form class="principal" action='/guardar' method="POST">
         <div class="col-md-4">
           <label for="validationServer01" class="form-label">Primer Nombre</label>
-          <input type="text" class="form-control is-valid" id="validationServer01" value="" required>
+          <input name='primerNombre' type="text" class="form-control is-valid" id="validationServer01" value="" required>
           <div class="valid-feedback" >
             Looks good!
           </div>
         </div>
         <div class="col-md-4">
           <label for="validationServer02" class="form-label">Segundo Nombre</label>
-          <input type="text" class="form-control is-valid" id="validationServer02" value="">
+          <input name='segundoNombre' type="text" class="form-control is-valid" id="validationServer02" value="">
           <div class="valid-feedback" style="display: none;">
             Looks good!
           </div>
         </div>
         <div class="col-md-4">
             <label for="validationServer01" class="form-label">Primer Apellido</label>
-            <input type="text" class="form-control is-valid" id="validationServer03" value="" required>
+            <input name='primerApellido' type="text" class="form-control is-valid" id="validationServer03" value="" required>
             <div class="valid-feedback" style="display: none;">
               Looks good!
             </div>
         </div>
         <div class="col-md-4">
             <label for="validationServer02" class="form-label">Segundo Apellido</label>
-            <input type="text" class="form-control is-valid" id="validationServer04" value="">
+            <input name='segundoApellido' type="text" class="form-control is-valid" id="validationServer04" value="">
             <div class="valid-feedback" style="display: none;">
               Looks good!
             </div>
         </div>
         <div class="col-md-4">
             <label for="validationServer02" class="form-label">Documento</label>
-            <input type="number" class="form-control is-valid" id="validationServer05" value="">
+            <input name='documento' type="number" class="form-control is-valid" id="validationServer05" value="">
             <div class="valid-feedback" style="display: none;">
               Looks good!
             </div>
@@ -50,7 +50,7 @@
             <label for="validationServerUsername" class="form-label">Correo Electrónico</label>
             <div class="input-group has-validation">
                 <span class="input-group-text" id="inputGroupPrepend3">@</span>
-                <input type="email" class="form-control is-invalid" id="validationServerUsername" aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback">
+                <input type="email" name='correoElectronico' class="form-control is-invalid" id="validationServerUsername" aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback">
                 <div id="validationServerUsernameFeedback" class="valid-feedback" style="display: none;">
                 Looks good!
                 </div>
@@ -96,6 +96,11 @@
           </div>
         </div>
          -->
+      </form>
+      <form class="principal" action='/consultar' method="POST">
+        <div class="col-12 submit" >
+          <button class="btn btn-primary" type="submit">Consultar</button>
+        </div>
       </form>
 </body>
 </html>
