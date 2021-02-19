@@ -1,14 +1,19 @@
 from flask import Flask, render_template, request,flash,redirect,session,url_for,make_response
 import os
-#from db import *
 import functools
+from flask_mysqldb import MySQL
 #from werkzeug.security import generate_password_hash, check_password_hash
 #from werkzeug.utils import secure_filename
 #from datetime import datetime
 
 app= Flask(__name__)
 app.secret_key='5fffa2e766c5f3d1a85ad8979864459a4d12b25e727ae7a78d1d8f958952a828L'
-
+app = Flask(__name__)
+app.config['MYSQL_HOST'] = 'database-2.cfk3hpc50gdi.us-east-1.rds.amazonaws.com'
+app.config['MYSQL_USER'] = 'admin'
+app.config['MYSQL_PASSWORD'] = '00000000'
+app.config['MYSQL_DB'] = 'trial'
+mysql = MySQL(app)
 if __name__ == '__name__':
     app.run(debug=True, host='0.0.0.0', port =80)
 
@@ -25,6 +30,14 @@ if __name__ == '__name__':
 @app.route('/')
 def index():    
     return render_template('index.html')
+
+@app.route('/consultar')
+def consultar():
+
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM personas")
+    reg=cur.fetchone()
+    return reg[1]
 
 '''
 @app.route('/cerrarSesion')
