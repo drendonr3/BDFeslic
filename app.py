@@ -62,7 +62,13 @@ def consultar():
         return render_template('lista.html',listas=reg)
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port =80)
+    #sin llave
+    #app.run(debug=True, host='0.0.0.0', port =80)
+    #con llave en aws
+    #app.run( host='0.0.0.0', port=443, ssl_context=('micertificado.pem', 'llaveprivada.pem'))
+
+    #con llave local
+    app.run( host='127.0.0.1', port=443, ssl_context=('micertificado.pem', 'llaveprivada.pem'))
 '''
 @app.route('/cerrarSesion')
 def cerrarSesion():

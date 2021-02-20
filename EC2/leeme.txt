@@ -1,0 +1,12 @@
+sudo -i
+cd ..
+cd ..
+cd home/ubuntu/BDFeslic
+source feslic/bin/activate
+/home/ubuntu/BDFeslic/feslic/bin/gunicorn --workers=20 -b 0.0.0.0:443 --certfile=micertificado.pem --keyfile=llaveprivada.pem wsgi:application
+
+
+ssh -i "dbfeslic2.pem" ubuntu@%id%
+
+
+openssl req -x509 -newkey rsa:4096 -nodes -out micertificado.pem -keyout llaveprivada.pem -days 365
