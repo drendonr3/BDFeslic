@@ -66,14 +66,7 @@ def consultarColegios():
     try:
         nombre = request.args.get('nombre')
         cur=conn.cursor()
-        query = "SELECT co.colegio,co.rector,co.direccion,\
-            co.telefono,mu.municipio,co.barrio, ca.calendario,se.sector \
-            FROM colegios AS co INNER JOIN calendarios AS ca \
-                ON co.id_calendario=ca.id \
-            INNER JOIN municipios AS mu \
-                ON co.id_municipio = mu.id \
-            INNER JOIN sectores_colegios AS se \
-                ON co.id_sector=se.id;"
+        query = "SELECT * FROM feslic.colegios_todos;"
         cur.execute(query)
         reg=cur.fetchall()
         print(dict(zip(range(len(reg)), reg)) )

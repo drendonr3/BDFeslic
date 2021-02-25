@@ -13,6 +13,8 @@ function consultarColegios(){
                 resps= JSON.parse(this.responseText);
                 console.log(resps)
                 bodyTable=document.getElementById("body-table");
+                bodyTable.removeChild(bodyTable.lastChild);
+                tbody = document.createElement('tbody');
                 for (i=0;i<Object.keys(resps).length;i++){
                     tr = document.createElement('tr');
                     th= document.createElement('th');
@@ -31,7 +33,6 @@ function consultarColegios(){
                     td=document.createElement('td');
                     td.innerHTML= resps[i].telefono;
                     tr.appendChild(td);
-                    bodyTable.appendChild(tr);
                     td=document.createElement('td');
                     td.innerHTML= resps[i].municipio;
                     tr.appendChild(td);
@@ -44,7 +45,12 @@ function consultarColegios(){
                     td=document.createElement('td');
                     td.innerHTML= resps[i].sector;
                     tr.appendChild(td);
+                    td=document.createElement('td');
+                    td.innerHTML= resps[i].correos;
+                    tr.appendChild(td);
+                    tbody.appendChild(tr);
                 }
+                bodyTable.appendChild(tbody);
             } else{
                     alert("No Se Agregó la Categoría");
             }
