@@ -4,103 +4,145 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Control Base de Datos</title>
+    <title>Base de Datos Fundación FESLIC</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
     <link rel='stylesheet' type='text/css' href="{{ url_for('static',filename='css/styles.css') }}">
 </head>
-<body>
-    <form class="principal" action='/guardar' method="POST">
+<body onload="">
+  <section class="header">
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="pills-buscar-tab" data-bs-toggle="pill" data-bs-target="#pills-buscar" type="button" role="tab" aria-controls="pills-buscar" aria-selected="true">BUSCAR</button>
+      </li>
+      <li class="nav-item" role="presentation" id='nav-colegios' onclick="consultarColegios()">
+        <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">COLEGIOS</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">LIBROS DONADOS</button>
+      </li>
+    </ul>
+  </section>
+
+  <section class="body">
+    <section class="left-panel">
+      <form class="principal" action='/guardar' method="POST">
         <div class="col-md-4">
-          <label for="validationServer01" class="form-label">Primer Nombre</label>
-          <input name='primerNombre' type="text" class="form-control is-valid" id="validationServer01" value="" required>
-          <div class="valid-feedback" >
-            Looks good!
+          <label for="validationDefault01" class="form-label label_busqueda">Nombre:</label>
+          <input type="text" class="form-control" id="validationDefault01" value="" required>
+        </div>
+        <div class="col-md-4">
+          <label for="validationDefault02" class="form-label label_busqueda">Rector:</label>
+          <input type="text" class="form-control" id="validationDefault02" value="" required>
+        </div>
+        <div class="col-md-4">
+          <label for="validationDefault02" class="form-label label_busqueda">Dirección:</label>
+          <input type="text" class="form-control" id="validationDefault02" value="" required>
+        </div>
+        <div class="div-2">
+          <div class="col-md-4">
+            <label for="validationDefault02" class="form-label label_busqueda">Telefono:</label>
+            <input type="text" class="form-control" id="validationDefault02" value="" required>
+          </div>
+          <div class="col-md-4">
+            <label for="validationDefault02" class="form-label label_busqueda">Ciudad:</label>
+            <input type="text" class="form-control" id="validationDefault02" value="" required>
           </div>
         </div>
-        <div class="col-md-4">
-          <label for="validationServer02" class="form-label">Segundo Nombre</label>
-          <input name='segundoNombre' type="text" class="form-control is-valid" id="validationServer02" value="">
-          <div class="valid-feedback" style="display: none;">
-            Looks good!
+        <div class="div-3">
+          <div class="col-md-4">
+            <label for="validationDefault02" class="form-label label_busqueda">Barrio:</label>
+            <input type="text" class="form-control" id="validationDefault02" value="" required>
+          </div>
+          <div class="col-md-4">
+            <label for="validationDefault02" class="form-label label_busqueda">Calendario:</label>
+            <input type="text" class="form-control" id="validationDefault02" value="" required>
+          </div>
+          <div class="col-md-4">
+            <label for="validationDefault02" class="form-label label_busqueda">Sector:</label>
+            <input type="text" class="form-control" id="validationDefault02" value="" required>
           </div>
         </div>
+
         <div class="col-md-4">
-            <label for="validationServer01" class="form-label">Primer Apellido</label>
-            <input name='primerApellido' type="text" class="form-control is-valid" id="validationServer03" value="" required>
-            <div class="valid-feedback" style="display: none;">
-              Looks good!
-            </div>
-        </div>
-        <div class="col-md-4">
-            <label for="validationServer02" class="form-label">Segundo Apellido</label>
-            <input name='segundoApellido' type="text" class="form-control is-valid" id="validationServer04" value="">
-            <div class="valid-feedback" style="display: none;">
-              Looks good!
-            </div>
-        </div>
-        <div class="col-md-4">
-            <label for="validationServer02" class="form-label">Documento</label>
-            <input name='documento' type="number" class="form-control is-valid" id="validationServer05" value="">
-            <div class="valid-feedback" style="display: none;">
-              Looks good!
-            </div>
-        </div>
-        <div class="col-md-4">
-            <label for="validationServerUsername" class="form-label">Correo Electrónico</label>
-            <div class="input-group has-validation">
-                <span class="input-group-text" id="inputGroupPrepend3">@</span>
-                <input type="email" name='correoElectronico' class="form-control is-invalid" id="validationServerUsername" aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback">
-                <div id="validationServerUsernameFeedback" class="valid-feedback" style="display: none;">
-                Looks good!
-                </div>
-            </div>
-        </div>
-        <div class="col-12 submit" >
-            <button class="btn btn-primary" type="submit">Enviar</button>
-        </div>
-       <!-- Aquí empieza la cabecera de la web
-        <div class="col-md-6">
-          <label for="validationServer03" class="form-label">City</label>
-          <input type="text" class="form-control is-invalid" id="validationServer03" aria-describedby="validationServer03Feedback" required>
-          <div id="validationServer03Feedback" class="invalid-feedback">
-            Please provide a valid city.
+          <label for="validationDefaultUsername" class="form-label label_busqueda">Correo Electrónico</label>
+          <div class="input-group">
+            <span class="input-group-text" id="inputGroupPrepend2">@</span>
+            <input type="text" class="form-control" id="validationDefaultUsername"  aria-describedby="inputGroupPrepend2" required>
           </div>
         </div>
-        <div class="col-md-3">
-          <label for="validationServer04" class="form-label">State</label>
-          <select class="form-select is-invalid" id="validationServer04" aria-describedby="validationServer04Feedback" required>
+
+        <div class="col-md-4">
+          <div class="input-group">
+            <span class="input-group-text" id="inputGroupPrepend2">@</span>
+            <input type="text" class="form-control" id="validationDefaultUsername"  aria-describedby="inputGroupPrepend2" required>
+          </div>
+        </div>
+        
+        <div class="col-md-6" style="display: none;">
+          <label for="validationDefault03" class="form-label label_busqueda">City</label>
+          <input type="text" class="form-control" id="validationDefault03" required>
+        </div>
+        <div class="col-md-3" style="display: none;">
+          <label for="validationDefault04" class="form-label label_busqueda">State</label>
+          <select class="form-select" id="validationDefault04" required>
             <option selected disabled value="">Choose...</option>
             <option>...</option>
           </select>
-          <div id="validationServer04Feedback" class="invalid-feedback">
-            Please select a valid state.
-          </div>
         </div>
-        <div class="col-md-3">
-          <label for="validationServer05" class="form-label">Zip</label>
-          <input type="text" class="form-control is-invalid" id="validationServer05" aria-describedby="validationServer05Feedback" required>
-          <div id="validationServer05Feedback" class="invalid-feedback">
-            Please provide a valid zip.
+        <div class="col-12" style="display: none;">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+            <label class="form-check-label" for="invalidCheck2">
+              Agree to terms and conditions
+            </label>
           </div>
         </div>
         <div class="col-12">
-          <div class="form-check">
-            <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" aria-describedby="invalidCheck3Feedback" required>
-            <label class="form-check-label" for="invalidCheck3">
-              Agree to terms and conditions
-            </label>
-            <div id="invalidCheck3Feedback" class="invalid-feedback">
-              You must agree before submitting.
-            </div>
-          </div>
-        </div>
-         -->
-      </form>
-      <form class="principal" action='/consultar' method="POST">
-        <div class="col-12 submit" >
-          <button class="btn btn-primary" type="submit">Consultar</button>
+          <button class="btn btn-primary" type="submit">Submit form</button>
         </div>
       </form>
+    </section>
+
+    <section class="rigth-panel">
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Rector</th>
+            <th scope="col">Dirección</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Ciudad</th>
+            <th scope="col">Barrio</th>
+            <th scope="col">Calendario</th>
+            <th scope="col">Sector</th>
+            <th scope="col">Correo</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>sssssssssssssssssssssssssssssssssssssssssss</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td colspan="2">Larry the Bird</td>
+            <td>@twitter</td>
+          </tr>
+        </tbody>
+      </table>   
+    </section>
+      
+  </section>
 </body>
 </html>

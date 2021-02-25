@@ -2,19 +2,13 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: auto;
 }
 .principal{
     width: auto;
-    display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 30px;
-    background-color: rgba(255, 255, 255, 0.1);
-    border: 1px solid #ccc;
-    border-radius: 30px;
-     color: #515151;
     padding: 20px 30px;
-    width: 430px;
     justify-content: space-around;
 }
 
@@ -37,4 +31,33 @@ body{
 
 .correo{
     width: 200px;
+}
+
+.body{
+    display: grid;
+    grid-template-columns: 25% 75%;
+    width: 100%;
+}
+
+.label_busqueda{
+    margin-top: .5rem;
+    margin-bottom: .1rem;
+}
+
+.div-2{
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.div-3{
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+}
+
+.col-md-4{
+padding-left: 3px;
+}
+
+.col-12{
+    padding-top: 15px;
 }
