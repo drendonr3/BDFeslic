@@ -34,9 +34,16 @@ body{
 }
 
 .body{
-    display: grid;
-    grid-template-columns: 25% 75%;
+    display: auto;
     width: 100%;
+}
+
+footer{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    height:fit-content;
+    border-top:3px;
 }
 
 .label_busqueda{
@@ -52,6 +59,11 @@ body{
 .div-3{
     display: grid;
     grid-template-columns: 33% 33% 33%;
+}
+
+.div-5{
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
 }
 
 .col-md-4{

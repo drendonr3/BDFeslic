@@ -66,13 +66,23 @@ def consultarColegios():
     try:
         nombre = request.args.get('nombre')
         cur=conn.cursor()
-        query = "SELECT * FROM feslic.colegios_todos;"
+        query = "SELECT * FROM feslic.colegios_todos_id;"
         cur.execute(query)
         reg=cur.fetchall()
         print(dict(zip(range(len(reg)), reg)) )
         return  dict(zip(range(len(reg)), reg)) 
     except:
         return  ({'status':'FALSE'})
+
+
+@app.route('/verColegio',methods=['POST'])
+def verColegio():
+    id = request.args.get('id')
+    cur=conn.cursor()
+    cur.execute("SELECT * FROM feslic.colegios_todos_id WHERE id=?",(id,))
+    reg=cur.fetchone()
+    print(dict(zip(range(len(reg)), reg)) )
+    return  dict(zip(range(len(reg)), reg)) 
 
 if __name__ == '__main__':
     #sin llave
