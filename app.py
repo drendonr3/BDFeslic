@@ -32,7 +32,7 @@ app.secret_key='5fffa2e766c5f3d1a85ad8979864459a4d12b25e727ae7a78d1d8f958952a828
         return view()
     return wrapped_view
 '''
-@app.route('/')
+@app.route('/',methods=['GET','POST'])
 def index():    
     return render_template('index.html')
     
@@ -60,6 +60,26 @@ def consultar():
         print(1)
         print(reg)
         return render_template('lista.html',listas=reg)
+
+@app.route('/consultarColegios',methods=['POST'])
+def consultarColegios():
+    try:
+        nombre = request.args.get('nombre')
+        cur=conn.cursor()
+        query = "SELECT co.colegio,co.rector,co.direccion,\
+            co.telefono,mu.municipio,co.barrio, ca.calendario,se.sector \
+            FROM colegios AS co INNER JOIN calendarios AS ca \
+                ON co.id_calendario=ca.id \
+            INNER JOIN municipios AS mu \
+                ON co.id_municipio = mu.id \
+            INNER JOIN sectores_colegios AS se \
+                ON co.id_sector=se.id;"
+        cur.execute(query)
+        reg=cur.fetchall()
+        print(dict(zip(range(len(reg)), reg)) )
+        return  dict(zip(range(len(reg)), reg)) 
+    except:
+        return  ({'status':'FALSE'})
 
 if __name__ == '__main__':
     #sin llave
