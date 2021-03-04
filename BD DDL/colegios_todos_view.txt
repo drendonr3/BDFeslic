@@ -1,0 +1,2 @@
+USE feslic;
+SELECT co.id,co.colegio,co.rector,co.direccion,co.telefono, mu.municipio,co.barrio,ca.calendario,se.sector,co.correos  FROM colegios AS co INNER JOIN sectores_colegios AS se ON se.id=co.id_sector INNER JOIN municipios AS mu ON mu.id=co.id_municipio INNER JOIN calendarios AS ca ON ca.id= co.id_calendario;

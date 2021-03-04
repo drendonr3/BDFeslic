@@ -1,0 +1,27 @@
+CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `admin`@`%` 
+    SQL SECURITY DEFINER
+VIEW `feslic`.`contactos_todos` AS
+    SELECT 
+        `con`.`id` AS `id`,
+        `per`.`primerNombre` AS `primerNombre`,
+        `per`.`segundoNombre` AS `segundoNombre`,
+        `per`.`primerApellido` AS `primerApellido`,
+        `per`.`segundoApellido` AS `segundoApellido`,
+        `car`.`cargo` AS `cargo`,
+        `per`.`telefono` AS `telefono`,
+        `per`.`correoElectronico` AS `correoElectronico`,
+        `org`.`nombre` AS `nombre`,
+        `tor`.`tipo` AS `tipo`,
+        `mu`.`municipio` AS `municipio`,
+        `td`.`tipoDocumento` AS `tipoDocumento`,
+        `per`.`documento` AS `documento`
+    FROM
+        ((((((`feslic`.`personas` `per`
+        JOIN `feslic`.`contactosOrganizaciones` `con` ON ((`per`.`id` = `con`.`id_persona`)))
+        JOIN `feslic`.`cargos` `car` ON ((`car`.`id` = `con`.`id_cargo`)))
+        JOIN `feslic`.`organizaciones` `org` ON ((`org`.`id` = `con`.`id_organizacion`)))
+        JOIN `feslic`.`tiposOrganizacion` `tor` ON ((`tor`.`id` = `org`.`id_tipo`)))
+        JOIN `feslic`.`tiposDocumento` `td` ON ((`td`.`id` = `per`.`id_tipoDocumento`)))
+        JOIN `feslic`.`municipios` `mu` ON ((`mu`.`id` = `org`.`id_municipio`)))

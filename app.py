@@ -51,38 +51,59 @@ def guardar():
         cur.connection.commit()
         return redirect('/')
 
-@app.route('/consultar',methods=['POST'])
-def consultar():
-    if request.method == 'POST':
-        cur = conn.cursor()
-        cur.execute("SELECT * FROM personas")
-        reg=cur.fetchall()
-        print(1)
-        print(reg)
-        return render_template('lista.html',listas=reg)
-
 @app.route('/consultarColegios',methods=['POST'])
 def consultarColegios():
     try:
+        print('*****')
         nombre = request.args.get('nombre')
         cur=conn.cursor()
-        query = "SELECT * FROM feslic.colegios_todos_id;"
+        query = "SELECT * FROM feslic.colegios_todos;"
         cur.execute(query)
         reg=cur.fetchall()
         print(dict(zip(range(len(reg)), reg)) )
         return  dict(zip(range(len(reg)), reg)) 
     except:
-        return  ({'status':'FALSE'})
-
+        return  dict(zip(range(len( ({'status':'FALSE'}))),  ({'status':'FALSE'})))
 
 @app.route('/verColegio',methods=['POST'])
 def verColegio():
-    id = request.args.get('id')
-    cur=conn.cursor()
-    cur.execute("SELECT * FROM feslic.colegios_todos_id WHERE id=?",(id,))
-    reg=cur.fetchone()
-    print(dict(zip(range(len(reg)), reg)) )
-    return  dict(zip(range(len(reg)), reg)) 
+    try:
+        print('----')
+        ids = request.args.get('id')
+        cur=conn.cursor()
+        cur.execute("SELECT * FROM feslic.colegios_todos WHERE id=%s",(ids))
+        reg=cur.fetchone()
+        print(reg)
+        return  reg
+    except:
+        return  dict(zip(range(len( ({'status':'FALSE'}))),  ({'status':'FALSE'})))
+
+@app.route('/consultarContactos',methods=['POST'])
+def consultarContactos():
+    try:
+        print('*****')
+        nombre = request.args.get('nombre')
+        cur=conn.cursor()
+        query = "SELECT * FROM feslic.contactos_todos;"
+        cur.execute(query)
+        reg=cur.fetchall()
+        print(dict(zip(range(len(reg)), reg)) )
+        return  dict(zip(range(len(reg)), reg)) 
+    except:
+        return  dict(zip(range(len( ({'status':'FALSE'}))),  ({'status':'FALSE'})))
+
+@app.route('/verContacto',methods=['POST'])
+def verContacto():
+    try:
+        print('----')
+        ids = request.args.get('id')
+        cur=conn.cursor()
+        cur.execute("SELECT * FROM feslic.contactos_todos WHERE id=%s",(ids))
+        reg=cur.fetchone()
+        print(reg)
+        return  reg
+    except:
+        return  dict(zip(range(len( ({'status':'FALSE'}))),  ({'status':'FALSE'})))
 
 if __name__ == '__main__':
     #sin llave
